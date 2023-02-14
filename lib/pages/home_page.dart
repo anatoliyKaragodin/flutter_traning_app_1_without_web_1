@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_traning_app_1/pages/profile_page.dart';
+import 'package:flutter_traning_app_1/pages/settings_page.dart';
+import 'package:flutter_traning_app_1/pages/training_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -23,9 +26,9 @@ class _HomePageState extends State<HomePage> {
   ];
 
   List<Widget> _pages = <Widget>[
-    ElevatedButton(onPressed: () {}, child: Text('Start training')),
-    Icon(Icons.person),
-    Icon(Icons.settings),
+    TrainingPage(),
+    ProfilePage(),
+    SettingsPage(),
   ];
 
   /// Index
