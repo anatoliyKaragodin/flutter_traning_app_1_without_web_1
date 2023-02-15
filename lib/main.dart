@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_traning_app_1/pages/home_page.dart';
+import 'package:flutter_traning_app_1/widgets/timer_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,10 +15,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        useMaterial3: true,
+        useMaterial3: false,
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      home: TimerWidget(waitTimeInSec: 180, onEnd: () {},),
     );
   }
 }
