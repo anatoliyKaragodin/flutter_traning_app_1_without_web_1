@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_traning_app_1/pages/exercise_page.dart';
 import 'package:flutter_traning_app_1/pages/home_page.dart';
 import 'package:flutter_traning_app_1/widgets/timer_widget.dart';
 
@@ -13,12 +14,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: false,
-        primarySwatch: Colors.blue,
-      ),
-      home: TimerWidget(waitTimeInSec: 180, onEnd: () {},),
-    );
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          useMaterial3: true,
+          primarySwatch: Colors.blue,
+        ),
+        home: HomePage(),
+        routes: {
+          '/homePage': (context) => HomePage(),
+          '/exercisePage': (context) => ExercisePage(),
+        });
   }
 }

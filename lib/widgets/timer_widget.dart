@@ -70,8 +70,7 @@ class _TimerWidgetState extends State<TimerWidget> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return Scaffold(
-      body: InkWell(
+    return  InkWell(
         onTap: () {isStarted ? pause() : start();},
         child: Center(
           child: Row(
@@ -125,7 +124,7 @@ class _TimerWidgetState extends State<TimerWidget> {
             ],
           ),
         ),
-      ),
+
     );
   }
 }

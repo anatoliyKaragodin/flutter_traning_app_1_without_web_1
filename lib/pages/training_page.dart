@@ -17,7 +17,9 @@ class _TrainingPageState extends State<TrainingPage> {
 
         Padding(
           padding: const EdgeInsets.only(top: 30.0, bottom: 20.0),
-          child: ElevatedButton(onPressed: () {}, child: Text('Start training')),
+          child: ElevatedButton(onPressed: () {
+            Navigator.of(context).pushNamed('/exercisePage');
+          }, child: Text('Start training')),
         ),
 
         Expanded(
