@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_traning_app_1/data/exercises.dart';
 import 'package:flutter_traning_app_1/riverpod/riverpod.dart';
+import 'package:flutter_traning_app_1/utils/dimensions_util.dart';
 
 class TimerWidget extends ConsumerStatefulWidget {
   final int waitTimeInSec;
@@ -26,7 +27,7 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
   void initState() {
     super.initState();
     _waitTime = Exercises()
-        .exercisesList[ref.read(exerciseNumberProvider)]
+        .listOfDayExercises[0][ref.read(exerciseNumberProvider)]
         .durationIsSec;
     // _waitTime = widget.waitTimeInSec;
     _calculationTime();
@@ -76,15 +77,16 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
 
   void onEnd() {
     if (ref.watch(exerciseNumberProvider) <
-        Exercises().exercisesList.length - 1) {
+        Exercises().listOfDayExercises[0].length - 1) {
       pause();
+      /// Dialog 'NEXT'
       showDialog(
           context: context,
           builder: (context) {
             return Center(
               child: Container(
-                height: 45,
-                width: 90,
+                height: Dimensions.height10*4.5,
+                width: Dimensions.width10*9,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(30),
                   color: Theme.of(context).dialogBackgroundColor,
@@ -96,7 +98,7 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
                         .update((state) => state + 1);
                     print(ref.read(exerciseNumberProvider));
                     _waitTime = Exercises()
-                        .exercisesList[ref.read(exerciseNumberProvider)]
+                        .listOfDayExercises[0][ref.read(exerciseNumberProvider)]
                         .durationIsSec;
                     _calculationTime();
                     Navigator.pop(context);
@@ -110,13 +112,9 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
               ),
             );
           });
-      // ref.watch(exerciseNumberProvider.notifier).update((state) => state + 1);
-      // print(ref.read(exerciseNumberProvider));
-      // _waitTime = Exercises()
-      //     .exercisesList[ref.read(exerciseNumberProvider)]
-      //     .durationIsSec;
-      // _calculationTime();
+
     } else {
+      /// Dialog 'FINISH'
       showDialog(
           context: context,
           builder: (context) {
@@ -142,7 +140,6 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
             );
           });
 
-      // ref.read(exerciseNumberProvider.notifier).update((state) => 0);
       pause();
     }
   }
@@ -172,13 +169,13 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
               alignment: Alignment.center,
               children: [
                 Container(
-                    height: 200,
-                    width: 200,
+                    height: Dimensions.height10*15,
+                    width: Dimensions.width10*15,
                     child: Transform(
                       alignment: Alignment.center,
                       transform: Matrix4.rotationY(math.pi),
                       child: CircularProgressIndicator(
-                        color: Colors.blueGrey[400],
+                        color: Colors.blueGrey[100],
                         value: _percent,
                         backgroundColor: Colors.green[400],
                         strokeWidth: 8,

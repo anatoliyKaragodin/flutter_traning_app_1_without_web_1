@@ -15,3 +15,11 @@ final soundOnProvider = StateProvider<bool>((ref) {
 final vibrationOnProvider = StateProvider<bool>((ref) {
   return true;
 });
+
+final selectedDayProvider = StateProvider<int>((ref) {
+  return 0;
+});
+
+final changeImageProvider = StateProvider<int>((ref) {
+  return 1;
+});

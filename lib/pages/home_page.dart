@@ -12,15 +12,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final List<String> days = [
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday'
-  ];
   final List<String> bottomBarLabels = [
     'Training',
     'Profile',
@@ -42,35 +33,28 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
         child: Column(
           children: [
-            Container(
-              height: Dimensions.height10*5,
-              child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 7,
-                  itemBuilder: (BuildContext context, int index) {
-                    return Padding(
-                      padding: EdgeInsets.all(Dimensions.height10*0.8),
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        child: Text(days[index]),
-                      ),
-                    );
-                  }),
-            ),
             Expanded(
                 child: Center(child: _pages.elementAt(_selectedBottomBarIndex)))
           ],
         ),
       ),
+      /// Bottom navigation bar
       bottomNavigationBar: BottomNavigationBar(
+      selectedIconTheme: IconThemeData(size: Dimensions.height10*3),
+        selectedFontSize: Dimensions.height10*1.6,
+        unselectedFontSize: Dimensions.height10*1.2,
+        backgroundColor: Colors.blueGrey[100],
         currentIndex: _selectedBottomBarIndex,
         onTap: _onItemTapped,
         items: [
+          /// Training page tab
           BottomNavigationBarItem(
               label: bottomBarLabels[0],
               icon: Icon(Icons.fitness_center_rounded)),
+          /// Profile page tab
           BottomNavigationBarItem(
               label: bottomBarLabels[1], icon: Icon(Icons.person)),
+          /// Settings page tab
           BottomNavigationBarItem(
               label: bottomBarLabels[2], icon: Icon(Icons.settings)),
         ],
