@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_traning_app_1/riverpod/riverpod.dart';
 import 'package:flutter_traning_app_1/utils/dimensions_util.dart';
@@ -22,6 +23,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          /// Sound option
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -33,6 +35,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                   }),
             ],
           ),
+          /// Vibration option
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -44,6 +47,12 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                   }),
             ],
           ),
+          SizedBox(height: Dimensions.height10*3,),
+         /// Exit button
+          ElevatedButton(onPressed: () {
+            SystemNavigator.pop();
+          },
+              child: Text('Exit'))
         ],
       ),
     );
