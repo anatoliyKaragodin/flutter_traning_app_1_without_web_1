@@ -1,4 +1,4 @@
-import 'package:get/get.dart';
+import 'package:flutter_traning_app_1/utils/library.dart';
 
 /// Dynamic size of UI elements
 class Dimensions {

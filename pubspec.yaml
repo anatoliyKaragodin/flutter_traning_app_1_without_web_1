@@ -35,6 +35,7 @@ dependencies:
   get: ^4.6.5
   flutter_animate: ^4.0.0
   audioplayers: ^0.20.1
+  vibration: ^1.7.6
 
 
 
@@ -68,6 +69,11 @@ flutter:
   assets:
     - assets/exercises/
     - assets/training start.mp3
+
+  fonts:
+    - family: MyFlutterApp
+      fonts:
+        - asset: assets/fonts/MyFlutterApp.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

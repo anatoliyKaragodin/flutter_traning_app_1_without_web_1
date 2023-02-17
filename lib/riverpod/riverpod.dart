@@ -1,4 +1,4 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_traning_app_1/utils/library.dart';
 
 final exerciseNumberProvider = StateProvider<int>((ref) {
   return 0;
@@ -20,10 +20,6 @@ final selectedDayProvider = StateProvider<int>((ref) {
   return 0;
 });
 
-// final changeImageProvider = StateProvider<int>((ref) {
-//   return 1;
-// });
-
-// final animationPausedProvider = StateProvider<bool>((ref) {
-//   return false;
-// });
+final animationPausedProvider = StateProvider<bool>((ref) {
+  return false;
+});

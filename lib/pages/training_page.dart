@@ -1,11 +1,8 @@
-import 'package:audioplayers/audioplayers.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_traning_app_1/utils/library.dart';
+
+import 'package:flutter_traning_app_1/app_icons.dart';
 import 'package:flutter_traning_app_1/data/exercises.dart';
 import 'package:flutter_traning_app_1/pages/exercise_page.dart';
-import 'package:flutter_traning_app_1/widgets/timer_widget.dart';
-
 import '../riverpod/riverpod.dart';
 import '../utils/dimensions_util.dart';
 import '../widgets/exercise_description_widget.dart';
@@ -41,7 +38,6 @@ class _TrainingPageState extends ConsumerState<TrainingPage> {
               scrollDirection: Axis.horizontal,
               itemCount: 7,
               itemBuilder: (BuildContext context, int index) {
-                // final selectedDay = ref.watch(selectedDayProvider);
                 return Padding(
                   padding: EdgeInsets.only(
                       top: Dimensions.height10 * 1.5,
@@ -52,7 +48,7 @@ class _TrainingPageState extends ConsumerState<TrainingPage> {
                     style: ButtonStyle(
                         backgroundColor: selectedDay == index
                             ? MaterialStatePropertyAll(Colors.blue[100])
-                            : MaterialStatePropertyAll(Colors.white)),
+                            : const MaterialStatePropertyAll(Colors.white)),
                     onPressed: () {
                       ref
                           .read(selectedDayProvider.notifier)
@@ -70,10 +66,22 @@ class _TrainingPageState extends ConsumerState<TrainingPage> {
               top: Dimensions.height10 * 3, bottom: Dimensions.height10 * 2),
           child: ElevatedButton(
             onPressed: () {
+              ref
+                  .read(animationPausedProvider.notifier)
+                  .update((state) => false);
+
               /// Play start sound
-              cache.play('training start.mp3', isNotification: true);
+              if (ref.read(soundOnProvider) == true) {
+                cache.play('training start.mp3', isNotification: true);
+              }
+
+              /// Vibration
+              if (ref.read(vibrationOnProvider) == true) {
+                Vibration.vibrate(duration: 800);
+              }
+
               ref.read(exerciseNumberProvider.notifier).update((state) => 0);
-              print('SELECTED DAY: $selectedDay');
+
               ExercisePage(
                 exercises: Exercises().listOfDayExercises[selectedDay],
               );
@@ -95,10 +103,13 @@ class _TrainingPageState extends ConsumerState<TrainingPage> {
                   child: ListTile(
                     onTap: () {
                       /// Run animation
-                      // ref.read(animationPausedProvider.notifier).update((state) => false);
-                      print('selected day: $selectedDay');
-                      print('index: $index');
-                      ref.read(exerciseNumberProvider.notifier).update((state) => index);
+                      ref
+                          .read(animationPausedProvider.notifier)
+                          .update((state) => false);
+
+                      ref
+                          .read(exerciseNumberProvider.notifier)
+                          .update((state) => index);
 
                       /// Dialog exercise description
                       showDialog(
@@ -132,11 +143,9 @@ class _TrainingPageState extends ConsumerState<TrainingPage> {
                                       /// Close button
                                       child: ElevatedButton(
                                         onPressed: () {
-                                          // ref.read(changeImageProvider.notifier).update((state) => 1);
-                                          // ref.read(animationPausedProvider.notifier).update((state) => true);
                                           Navigator.pop(context);
                                         },
-                                        child: Icon(Icons.check),
+                                        child: const Icon(Icons.check),
                                       ),
                                     ),
                                   ],
@@ -145,7 +154,11 @@ class _TrainingPageState extends ConsumerState<TrainingPage> {
                             );
                           });
                     },
-                    leading: Icon(Icons.fitness_center_rounded),
+                    leading: Icon(
+                      MyFlutterApp.exercise,
+                      size: Dimensions.height10 * 4,
+                      color: Colors.black87,
+                    ),
                     title: Text(Exercises()
                         .listOfDayExercises[selectedDay][index]
                         .label),

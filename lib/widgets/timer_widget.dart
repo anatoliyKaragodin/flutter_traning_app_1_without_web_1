@@ -1,8 +1,8 @@
-import 'dart:async';
-import 'dart:math' as math;
+import 'package:flutter_traning_app_1/utils/library.dart';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'dart:math' as math;
+import 'dart:async';
+
 import 'package:flutter_traning_app_1/data/exercises.dart';
 import 'package:flutter_traning_app_1/riverpod/riverpod.dart';
 import 'package:flutter_traning_app_1/utils/dimensions_util.dart';
@@ -27,7 +27,8 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
   void initState() {
     super.initState();
     _waitTime = Exercises()
-        .listOfDayExercises[ref.read(selectedDayProvider)][ref.read(exerciseNumberProvider)]
+        .listOfDayExercises[ref.read(selectedDayProvider)]
+            [ref.read(exerciseNumberProvider)]
         .durationIsSec;
     // _waitTime = widget.waitTimeInSec;
     _calculationTime();
@@ -42,11 +43,11 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
 
   void start() {
     if (_waitTime > 0) {
-      // ref.read(animationPausedProvider.notifier).update((state) => false);
+      ref.read(animationPausedProvider.notifier).update((state) => false);
       setState(() {
         isStarted = true;
       });
-      _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+      _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
         _waitTime -= 1;
         _calculationTime();
         if (_waitTime <= 0) {
@@ -56,14 +57,14 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
     }
   }
 
-  void restart() {
-    _waitTime = widget.waitTimeInSec;
-    _calculationTime();
-  }
+  // void restart() {
+  //   _waitTime = widget.waitTimeInSec;
+  //   _calculationTime();
+  // }
 
   void pause() {
     _timer?.cancel();
-    // ref.read(animationPausedProvider.notifier).update((state) => true);
+    ref.read(animationPausedProvider.notifier).update((state) => true);
     setState(() {
       isStarted = false;
     });
@@ -72,7 +73,11 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
   void _calculationTime() {
     String secondsStr = _waitTime.toString();
     setState(() {
-      _percent = _waitTime / widget.waitTimeInSec;
+      _percent = _waitTime /
+          Exercises()
+              .listOfDayExercises[ref.read(selectedDayProvider)]
+          [ref.read(exerciseNumberProvider)]
+              .durationIsSec;
       timeStr = secondsStr;
     });
   }
@@ -80,29 +85,32 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
   void onEnd() {
     // ref.read(animationPausedProvider.notifier).update((state) => true);
     if (ref.watch(exerciseNumberProvider) <
-        Exercises().listOfDayExercises[ref.watch(selectedDayProvider)].length - 1) {
+        Exercises().listOfDayExercises[ref.watch(selectedDayProvider)].length -
+            1) {
       pause();
+
       /// Dialog 'NEXT'
       showDialog(
           context: context,
           builder: (context) {
             return Center(
               child: Container(
-                height: Dimensions.height10*30,
-                width: Dimensions.width10*30,
+                height: Dimensions.height10 * 20,
+                width: Dimensions.width10 * 20,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Dimensions.height10*30),
+                  borderRadius: BorderRadius.circular(Dimensions.height10 * 30),
                   color: Theme.of(context).dialogBackgroundColor,
                 ),
                 child: TextButton(
                   onPressed: () {
-                    // ref.read(changeImageProvider.notifier).update((state) => 1);
+
                     ref
                         .watch(exerciseNumberProvider.notifier)
                         .update((state) => state + 1);
-                    print(ref.read(exerciseNumberProvider));
+
                     _waitTime = Exercises()
-                        .listOfDayExercises[ref.read(selectedDayProvider)][ref.read(exerciseNumberProvider)]
+                        .listOfDayExercises[ref.read(selectedDayProvider)]
+                            [ref.read(exerciseNumberProvider)]
                         .durationIsSec;
                     _calculationTime();
                     Navigator.pop(context);
@@ -110,13 +118,12 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
                   },
                   child: Text(
                     'NEXT',
-                    style: TextStyle(fontSize: Dimensions.height10*3),
+                    style: TextStyle(fontSize: Dimensions.height10 * 3),
                   ),
                 ),
               ),
             );
           });
-
     } else {
       /// Dialog 'FINISH'
       showDialog(
@@ -124,22 +131,22 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
           builder: (context) {
             return Center(
               child: Container(
-                height: Dimensions.height10*30,
-                width: Dimensions.width10*30,
+                height: Dimensions.height10 * 20,
+                width: Dimensions.width10 * 20,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(Dimensions.height10*30),
+                  borderRadius: BorderRadius.circular(Dimensions.height10 * 30),
                   color: Theme.of(context).dialogBackgroundColor,
                 ),
                 child: TextButton(
                   onPressed: () {
                     onEnd();
-                    // ref.read(animationPausedProvider.notifier).update((state) => true);
-                    // _calculationTime();
+
+                    _calculationTime();
                     Navigator.pushNamed(context, '/homePage');
                   },
                   child: Text(
                     'FINISH',
-                    style: TextStyle(fontSize: Dimensions.height10*3),
+                    style: TextStyle(fontSize: Dimensions.height10 * 3),
                   ),
                 ),
               ),
@@ -152,7 +159,6 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
 
   @override
   Widget build(BuildContext context) {
-
     return InkWell(
       onTap: () {
         isStarted ? pause() : start();
@@ -161,22 +167,14 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            /// Restart button
-            // Container(
-            //   child: FloatingActionButton(
-            //     onPressed: () {
-            //       restart();
-            //     },
-            //     child: Icon(Icons.restart_alt_rounded),
-            //   ),
-            // ),
+
             /// Timer
             Stack(
               alignment: Alignment.center,
               children: [
                 Container(
-                    height: Dimensions.height10*15,
-                    width: Dimensions.width10*15,
+                    height: Dimensions.height10 * 15,
+                    width: Dimensions.width10 * 15,
                     child: Transform(
                       alignment: Alignment.center,
                       transform: Matrix4.rotationY(math.pi),
@@ -189,24 +187,13 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
                     )),
                 Positioned(
                     child: Text(timeStr,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 40,
                         ))),
               ],
             ),
 
-            /// Play/pause button
-            // Container(
-            //   child: FloatingActionButton(
-            //     onPressed: () {
-            //       isStarted ? pause() : start();
-            //     },
-            //     child: isStarted
-            //         ? Icon(Icons.pause)
-            //         : Icon(Icons.play_arrow_rounded),
-            //   ),
-            // ),
           ],
         ),
       ),

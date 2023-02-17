@@ -2,11 +2,11 @@ class ExerciseModel {
   final String label;
   final String description;
   final int durationIsSec;
-  final String image;
+  final List<String> images;
   ExerciseModel({
     required this.label,
     required this.description,
     required this.durationIsSec,
-    required this.image
+    required this.images
   });
 }

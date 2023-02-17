@@ -1,4 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_traning_app_1/utils/library.dart';
+
+import 'package:flutter_traning_app_1/app_icons.dart';
 import 'package:flutter_traning_app_1/pages/profile_page.dart';
 import 'package:flutter_traning_app_1/pages/settings_page.dart';
 import 'package:flutter_traning_app_1/pages/training_page.dart';
@@ -18,14 +20,16 @@ class _HomePageState extends State<HomePage> {
     'Settings',
   ];
 
-  List<Widget> _pages = <Widget>[
-    TrainingPage(),
-    ProfilePage(),
-    SettingsPage(),
+  final List<Widget> _pages = <Widget>[
+    const TrainingPage(),
+    const ProfilePage(),
+    const SettingsPage(),
   ];
 
   /// Index
   int _selectedBottomBarIndex = 0;
+
+  final double iconSize = Dimensions.height10*3;
 
   @override
   Widget build(BuildContext context) {
@@ -41,22 +45,22 @@ class _HomePageState extends State<HomePage> {
       /// Bottom navigation bar
       bottomNavigationBar: BottomNavigationBar(
       selectedIconTheme: IconThemeData(size: Dimensions.height10*3),
-        selectedFontSize: Dimensions.height10*1.6,
+        selectedFontSize: Dimensions.height10*1.8,
         unselectedFontSize: Dimensions.height10*1.2,
-        backgroundColor: Colors.blueGrey[100],
+        backgroundColor: Colors.grey[200],
         currentIndex: _selectedBottomBarIndex,
         onTap: _onItemTapped,
         items: [
           /// Training page tab
           BottomNavigationBarItem(
               label: bottomBarLabels[0],
-              icon: Icon(Icons.fitness_center_rounded)),
+              icon: Icon(MyFlutterApp.exercise, size: iconSize,)),
           /// Profile page tab
           BottomNavigationBarItem(
-              label: bottomBarLabels[1], icon: Icon(Icons.person)),
+              label: bottomBarLabels[1], icon: Icon(MyFlutterApp.profile, size: iconSize)),
           /// Settings page tab
           BottomNavigationBarItem(
-              label: bottomBarLabels[2], icon: Icon(Icons.settings)),
+              label: bottomBarLabels[2], icon: Icon(MyFlutterApp.settings, size: iconSize)),
         ],
       ),
     );

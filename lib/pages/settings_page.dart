@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_traning_app_1/utils/library.dart';
+
 import 'package:flutter_traning_app_1/riverpod/riverpod.dart';
 import 'package:flutter_traning_app_1/utils/dimensions_util.dart';
 
@@ -27,7 +26,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Sound'),
+              const Text('Sound'),
               Checkbox(
                   value: soundState,
                   onChanged: (value) {
@@ -39,7 +38,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Vibration'),
+              const Text('Vibration'),
               Checkbox(
                   value: vibrationState,
                   onChanged: (vibrOn) {
@@ -52,7 +51,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
           ElevatedButton(onPressed: () {
             SystemNavigator.pop();
           },
-              child: Text('Exit'))
+              child: const Text('Exit'))
         ],
       ),
     );

@@ -31,15 +31,15 @@ class _ExerciseDescriptionWidgetState extends ConsumerState<ExerciseDescriptionW
         child: Column(
           children: [
             AnimatedImagesWidget(
-              image: Exercises()
+              images: Exercises()
                   .listOfDayExercises[ref.read(selectedDayProvider)][ref.read(exerciseNumberProvider)]
-                  .image,
+                  .images,
             ),
             Text(
               Exercises()
                   .listOfDayExercises[ref.read(selectedDayProvider)][ref.read(exerciseNumberProvider)]
                   .label,
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             // Text('duration ${exercise.durationIsSec.toString()} seconds'),
             SizedBox(
