@@ -73,6 +73,7 @@ class _TrainingPageState extends ConsumerState<TrainingPage> {
               /// Play start sound
               cache.play('training start.mp3', isNotification: true);
               ref.read(exerciseNumberProvider.notifier).update((state) => 0);
+              print('SELECTED DAY: $selectedDay');
               ExercisePage(
                 exercises: Exercises().listOfDayExercises[selectedDay],
               );
@@ -93,13 +94,16 @@ class _TrainingPageState extends ConsumerState<TrainingPage> {
                       top: Dimensions.height10, bottom: Dimensions.height10),
                   child: ListTile(
                     onTap: () {
-                      ref.read(animationPausedProvider.notifier).update((state) => false);
+                      /// Run animation
+                      // ref.read(animationPausedProvider.notifier).update((state) => false);
+                      print('selected day: $selectedDay');
+                      print('index: $index');
+                      ref.read(exerciseNumberProvider.notifier).update((state) => index);
 
                       /// Dialog exercise description
                       showDialog(
                           context: context,
                           builder: (context) {
-
                             return Center(
                               child: Container(
                                 height: Dimensions.height10 * 65,
@@ -114,18 +118,21 @@ class _TrainingPageState extends ConsumerState<TrainingPage> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
+                                    /// Exercise description widget
                                     ExerciseDescriptionWidget(
                                       exercise: Exercises()
                                               .listOfDayExercises[selectedDay]
-                                          [index],
+                                          [ref.read(exerciseNumberProvider)],
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(
                                           top: Dimensions.height10,
                                           bottom: Dimensions.height10),
+
+                                      /// Close button
                                       child: ElevatedButton(
                                         onPressed: () {
-                                          ref.read(changeImageProvider.notifier).update((state) => 1);
+                                          // ref.read(changeImageProvider.notifier).update((state) => 1);
                                           // ref.read(animationPausedProvider.notifier).update((state) => true);
                                           Navigator.pop(context);
                                         },

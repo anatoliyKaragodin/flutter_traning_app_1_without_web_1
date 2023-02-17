@@ -27,7 +27,7 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
   void initState() {
     super.initState();
     _waitTime = Exercises()
-        .listOfDayExercises[0][ref.read(exerciseNumberProvider)]
+        .listOfDayExercises[ref.read(selectedDayProvider)][ref.read(exerciseNumberProvider)]
         .durationIsSec;
     // _waitTime = widget.waitTimeInSec;
     _calculationTime();
@@ -42,7 +42,7 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
 
   void start() {
     if (_waitTime > 0) {
-      ref.read(animationPausedProvider.notifier).update((state) => false);
+      // ref.read(animationPausedProvider.notifier).update((state) => false);
       setState(() {
         isStarted = true;
       });
@@ -63,7 +63,7 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
 
   void pause() {
     _timer?.cancel();
-    ref.read(animationPausedProvider.notifier).update((state) => true);
+    // ref.read(animationPausedProvider.notifier).update((state) => true);
     setState(() {
       isStarted = false;
     });
@@ -78,9 +78,9 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
   }
 
   void onEnd() {
-    ref.read(animationPausedProvider.notifier).update((state) => true);
+    // ref.read(animationPausedProvider.notifier).update((state) => true);
     if (ref.watch(exerciseNumberProvider) <
-        Exercises().listOfDayExercises[0].length - 1) {
+        Exercises().listOfDayExercises[ref.watch(selectedDayProvider)].length - 1) {
       pause();
       /// Dialog 'NEXT'
       showDialog(
@@ -88,21 +88,21 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
           builder: (context) {
             return Center(
               child: Container(
-                height: Dimensions.height10*4.5,
-                width: Dimensions.width10*9,
+                height: Dimensions.height10*30,
+                width: Dimensions.width10*30,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(Dimensions.height10*30),
                   color: Theme.of(context).dialogBackgroundColor,
                 ),
                 child: TextButton(
                   onPressed: () {
-                    ref.read(changeImageProvider.notifier).update((state) => 1);
+                    // ref.read(changeImageProvider.notifier).update((state) => 1);
                     ref
                         .watch(exerciseNumberProvider.notifier)
                         .update((state) => state + 1);
                     print(ref.read(exerciseNumberProvider));
                     _waitTime = Exercises()
-                        .listOfDayExercises[0][ref.read(exerciseNumberProvider)]
+                        .listOfDayExercises[ref.read(selectedDayProvider)][ref.read(exerciseNumberProvider)]
                         .durationIsSec;
                     _calculationTime();
                     Navigator.pop(context);
@@ -110,7 +110,7 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
                   },
                   child: Text(
                     'NEXT',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: Dimensions.height10*3),
                   ),
                 ),
               ),
@@ -124,21 +124,22 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
           builder: (context) {
             return Center(
               child: Container(
-                height: 45,
-                width: 90,
+                height: Dimensions.height10*30,
+                width: Dimensions.width10*30,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30),
+                  borderRadius: BorderRadius.circular(Dimensions.height10*30),
                   color: Theme.of(context).dialogBackgroundColor,
                 ),
                 child: TextButton(
                   onPressed: () {
+                    onEnd();
                     // ref.read(animationPausedProvider.notifier).update((state) => true);
-                    _calculationTime();
+                    // _calculationTime();
                     Navigator.pushNamed(context, '/homePage');
                   },
                   child: Text(
                     'FINISH',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: Dimensions.height10*3),
                   ),
                 ),
               ),

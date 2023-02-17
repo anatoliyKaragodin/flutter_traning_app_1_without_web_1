@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_traning_app_1/models/exercise_model.dart';
 import 'package:flutter_traning_app_1/widgets/animated_images_widget.dart';
 
+import '../data/exercises.dart';
+import '../riverpod/riverpod.dart';
 import '../utils/dimensions_util.dart';
 
-class ExerciseDescriptionWidget extends StatelessWidget {
+class ExerciseDescriptionWidget extends ConsumerStatefulWidget {
   final ExerciseModel exercise;
 
   const ExerciseDescriptionWidget({
@@ -12,6 +15,11 @@ class ExerciseDescriptionWidget extends StatelessWidget {
     required this.exercise,
   }) : super(key: key);
 
+  @override
+  ConsumerState<ExerciseDescriptionWidget> createState() => _ExerciseDescriptionWidgetState();
+}
+
+class _ExerciseDescriptionWidgetState extends ConsumerState<ExerciseDescriptionWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -23,17 +31,23 @@ class ExerciseDescriptionWidget extends StatelessWidget {
         child: Column(
           children: [
             AnimatedImagesWidget(
-              imageList: exercise.imagesList,
+              image: Exercises()
+                  .listOfDayExercises[ref.read(selectedDayProvider)][ref.read(exerciseNumberProvider)]
+                  .image,
             ),
             Text(
-              exercise.label,
+              Exercises()
+                  .listOfDayExercises[ref.read(selectedDayProvider)][ref.read(exerciseNumberProvider)]
+                  .label,
               style: TextStyle(fontWeight: FontWeight.bold),
             ),
             // Text('duration ${exercise.durationIsSec.toString()} seconds'),
             SizedBox(
               height: Dimensions.height10,
             ),
-            Text(exercise.description),
+            Text(Exercises()
+                .listOfDayExercises[ref.read(selectedDayProvider)][ref.read(exerciseNumberProvider)]
+                .description),
           ],
         ),
       ),

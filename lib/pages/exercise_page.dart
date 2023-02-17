@@ -8,8 +8,8 @@ import 'package:flutter_traning_app_1/widgets/exercise_description_widget.dart';
 import 'package:flutter_traning_app_1/widgets/timer_widget.dart';
 
 class ExercisePage extends ConsumerStatefulWidget {
-  final List<ExerciseModel>? exercises;
-  const ExercisePage({Key? key, this.exercises}) : super(key: key);
+  final List<ExerciseModel> exercises;
+  const ExercisePage({Key? key, required this.exercises}) : super(key: key);
 
   @override
   ConsumerState<ExercisePage> createState() => _ExercisePageState();
@@ -34,7 +34,7 @@ class _ExercisePageState extends ConsumerState<ExercisePage> {
           TimerWidget(
             waitTimeInSec: widget.exercises![currentExerciseNumber].durationIsSec,
           ),
-          // SizedBox(height: Dimensions.height10*3),
+          SizedBox(height: Dimensions.height10/2),
 
           /// Exercise description
           ExerciseDescriptionWidget(
