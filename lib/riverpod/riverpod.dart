@@ -23,3 +23,7 @@ final selectedDayProvider = StateProvider<int>((ref) {
 final changeImageProvider = StateProvider<int>((ref) {
   return 1;
 });
+
+final animationPausedProvider = StateProvider<bool>((ref) {
+  return false;
+});

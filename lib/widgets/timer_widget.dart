@@ -42,6 +42,7 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
 
   void start() {
     if (_waitTime > 0) {
+      ref.read(animationPausedProvider.notifier).update((state) => false);
       setState(() {
         isStarted = true;
       });
@@ -62,6 +63,7 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
 
   void pause() {
     _timer?.cancel();
+    ref.read(animationPausedProvider.notifier).update((state) => true);
     setState(() {
       isStarted = false;
     });
@@ -76,6 +78,7 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
   }
 
   void onEnd() {
+    ref.read(animationPausedProvider.notifier).update((state) => true);
     if (ref.watch(exerciseNumberProvider) <
         Exercises().listOfDayExercises[0].length - 1) {
       pause();
@@ -93,6 +96,7 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
                 ),
                 child: TextButton(
                   onPressed: () {
+                    ref.read(changeImageProvider.notifier).update((state) => 1);
                     ref
                         .watch(exerciseNumberProvider.notifier)
                         .update((state) => state + 1);
@@ -128,6 +132,7 @@ class _TimerWidgetState extends ConsumerState<TimerWidget> {
                 ),
                 child: TextButton(
                   onPressed: () {
+                    // ref.read(animationPausedProvider.notifier).update((state) => true);
                     _calculationTime();
                     Navigator.pushNamed(context, '/homePage');
                   },

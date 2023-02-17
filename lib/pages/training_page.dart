@@ -1,4 +1,3 @@
-
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,7 +29,7 @@ class _TrainingPageState extends ConsumerState<TrainingPage> {
   ];
   @override
   Widget build(BuildContext context) {
-AudioCache cache = AudioCache();
+    AudioCache cache = AudioCache();
     final selectedDay = ref.watch(selectedDayProvider);
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -46,9 +45,9 @@ AudioCache cache = AudioCache();
                 return Padding(
                   padding: EdgeInsets.only(
                       top: Dimensions.height10 * 1.5,
-                  bottom: Dimensions.height10,
-                  left: Dimensions.width10/2,
-                  right: Dimensions.width10/2),
+                      bottom: Dimensions.height10,
+                      left: Dimensions.width10 / 2,
+                      right: Dimensions.width10 / 2),
                   child: ElevatedButton(
                     style: ButtonStyle(
                         backgroundColor: selectedDay == index
@@ -71,7 +70,8 @@ AudioCache cache = AudioCache();
               top: Dimensions.height10 * 3, bottom: Dimensions.height10 * 2),
           child: ElevatedButton(
             onPressed: () {
-cache.play('training start.mp3', isNotification: true);
+              /// Play start sound
+              cache.play('training start.mp3', isNotification: true);
               ref.read(exerciseNumberProvider.notifier).update((state) => 0);
               ExercisePage(
                 exercises: Exercises().listOfDayExercises[selectedDay],
@@ -93,10 +93,13 @@ cache.play('training start.mp3', isNotification: true);
                       top: Dimensions.height10, bottom: Dimensions.height10),
                   child: ListTile(
                     onTap: () {
+                      ref.read(animationPausedProvider.notifier).update((state) => false);
+
                       /// Dialog exercise description
                       showDialog(
                           context: context,
                           builder: (context) {
+
                             return Center(
                               child: Container(
                                 height: Dimensions.height10 * 65,
@@ -112,9 +115,9 @@ cache.play('training start.mp3', isNotification: true);
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     ExerciseDescriptionWidget(
-                                        exercise: Exercises()
-                                                .listOfDayExercises[selectedDay]
-                                            [index],
+                                      exercise: Exercises()
+                                              .listOfDayExercises[selectedDay]
+                                          [index],
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(
@@ -122,6 +125,8 @@ cache.play('training start.mp3', isNotification: true);
                                           bottom: Dimensions.height10),
                                       child: ElevatedButton(
                                         onPressed: () {
+                                          ref.read(changeImageProvider.notifier).update((state) => 1);
+                                          // ref.read(animationPausedProvider.notifier).update((state) => true);
                                           Navigator.pop(context);
                                         },
                                         child: Icon(Icons.check),

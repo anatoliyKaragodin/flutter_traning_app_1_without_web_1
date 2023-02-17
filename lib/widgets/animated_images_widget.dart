@@ -13,25 +13,27 @@ class AnimatedImagesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Consumer(
       builder: (context, ref, widget) {
+        // ref.read(animationPausedProvider.notifier).update((state) => false);
         final imageNumber = ref.watch(changeImageProvider);
-
-        Future.delayed(Duration(milliseconds: 500), () {
-          imageNumber < imageList.length
-              ? ref
-                  .read(changeImageProvider.notifier)
-                  .update((state) => state + 1)
-              : ref.read(changeImageProvider.notifier).update((state) => 1);
-        });
+        final animationPaused = ref.watch(animationPausedProvider);
+        if (animationPaused == false) {
+          Future.delayed(Duration(milliseconds: 500), () {
+            imageNumber < imageList.length
+                ? ref
+                    .read(changeImageProvider.notifier)
+                    .update((state) => state + 1)
+                : ref.read(changeImageProvider.notifier).update((state) => 1);
+          });
+        }
         return Container(
           decoration: BoxDecoration(
               image: DecorationImage(
                   fit: BoxFit.fitHeight,
-                  image: AssetImage(imageList[imageNumber-1]))),
-          height: Dimensions.height10*22,
-          width: Dimensions.width10*22,
+                  image: AssetImage(imageList[imageNumber - 1]))),
+          height: Dimensions.height10 * 22,
+          width: Dimensions.width10 * 22,
         );
       },
     );
