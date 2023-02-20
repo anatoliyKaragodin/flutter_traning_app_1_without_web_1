@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/homePage': (context) => const HomePage(),
           '/exercisePage': (context) => ExercisePage(
+                /// Delete and check
                 exercises: Exercises().listOfDayExercises[0],
               ),
         });
