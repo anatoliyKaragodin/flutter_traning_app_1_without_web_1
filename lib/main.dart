@@ -1,10 +1,19 @@
+import 'package:flutter_traning_app_1/data/get_url.dart';
+import 'package:flutter_traning_app_1/data/shared_preferences.dart';
+import 'package:flutter_traning_app_1/pages/home_page.dart';
+import 'package:flutter_traning_app_1/utils/dimensions_util.dart';
 import 'package:flutter_traning_app_1/utils/library.dart';
 
 import 'package:flutter_traning_app_1/pages/exercise_page.dart';
-import 'package:flutter_traning_app_1/pages/home_page.dart';
 import 'data/exercises.dart';
 
-void main() {
+void main() async {
+  /// Check initialization
+  WidgetsFlutterBinding.ensureInitialized();
+  await Future.delayed(const Duration(milliseconds: 300));
+  // /// Load url
+  // GetUrl().url = await LocalData().getUrl();
+  // print('LOAD URL: ${GetUrl().url}');
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -15,8 +24,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
         debugShowCheckedModeBanner: false,
+
+        /// ThemeData
         theme: ThemeData(
-          useMaterial3: true,
+          // useMaterial3: true,
           primarySwatch: Colors.blue,
         ),
         home: const HomePage(),

@@ -23,3 +23,13 @@ final selectedDayProvider = StateProvider<int>((ref) {
 final animationPausedProvider = StateProvider<bool>((ref) {
   return false;
 });
+
+// final urlErrorProvider = StateProvider<bool>((ref) => true);
+
+final completedExerciseProvider = StateProvider<int>((ref) {
+  return 0;
+});
+
+final completedWorkoutProvider = StateProvider<int>((ref) {
+  return 0;
+});

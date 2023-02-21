@@ -92,6 +92,7 @@ class _ExercisePageState extends ConsumerState<ExercisePage> {
 
   /// On end
   void onEnd() {
+
     // ref.read(animationPausedProvider.notifier).update((state) => true);
     if (ref.watch(exerciseNumberProvider) <
         Exercises().listOfDayExercises[ref.watch(selectedDayProvider)].length -
@@ -112,6 +113,7 @@ class _ExercisePageState extends ConsumerState<ExercisePage> {
                 ),
                 child: TextButton(
                   onPressed: () {
+                    ref.read(completedExerciseProvider.notifier).update((state) => state + 1);
                     ref
                         .watch(exerciseNumberProvider.notifier)
                         .update((state) => state + 1);
@@ -148,6 +150,8 @@ class _ExercisePageState extends ConsumerState<ExercisePage> {
                 child: TextButton(
                   onPressed: () {
                     onEnd();
+
+                    ref.read(completedWorkoutProvider.notifier).update((state) => state + 1);
 
                     _calculationTime();
                     Navigator.pushNamed(context, '/homePage');

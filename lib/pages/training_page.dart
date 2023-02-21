@@ -32,7 +32,7 @@ class _TrainingPageState extends ConsumerState<TrainingPage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         /// Days list
-        Container(
+        SizedBox(
           height: Dimensions.height10 * 6,
           child: ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -46,15 +46,20 @@ class _TrainingPageState extends ConsumerState<TrainingPage> {
                       right: Dimensions.width10 / 2),
                   child: ElevatedButton(
                     style: ButtonStyle(
+                        shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                            borderRadius:
+                            BorderRadius.circular(Dimensions.height10 * 3))),
                         backgroundColor: selectedDay == index
-                            ? MaterialStatePropertyAll(Colors.blue[100])
+                            ? MaterialStatePropertyAll(Colors.blue)
                             : const MaterialStatePropertyAll(Colors.white)),
                     onPressed: () {
                       ref
                           .read(selectedDayProvider.notifier)
                           .update((state) => index);
                     },
-                    child: Text(days[index]),
+                    child: Text(days[index], style: TextStyle(color: selectedDay != index
+                        ? Colors.blue
+                        : Colors.white)),
                   ),
                 );
               }),
@@ -65,7 +70,12 @@ class _TrainingPageState extends ConsumerState<TrainingPage> {
           padding: EdgeInsets.only(
               top: Dimensions.height10 * 3, bottom: Dimensions.height10 * 2),
           child: ElevatedButton(
+            style: ButtonStyle(
+                shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                    borderRadius:
+                        BorderRadius.circular(Dimensions.height10 * 3)))),
             onPressed: () {
+              ref.read(completedExerciseProvider.notifier).update((state) => state + 1);
               ref
                   .read(animationPausedProvider.notifier)
                   .update((state) => false);
@@ -142,6 +152,10 @@ class _TrainingPageState extends ConsumerState<TrainingPage> {
 
                                       /// Close button
                                       child: ElevatedButton(
+                                        style: ButtonStyle(
+                                            shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(Dimensions.height10 * 3)))),
                                         onPressed: () {
                                           Navigator.pop(context);
                                         },

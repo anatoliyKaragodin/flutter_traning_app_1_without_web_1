@@ -148,7 +148,7 @@
 //                     onEnd();
 //
 //                     _calculationTime();
-//                     Navigator.pushNamed(context, '/homePage');
+//                     Navigator.pushNamed(context, '/AppHomePage');
 //                   },
 //                   child: Text(
 //                     'FINISH',
