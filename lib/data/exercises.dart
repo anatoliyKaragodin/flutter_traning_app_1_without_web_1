@@ -61,7 +61,7 @@ class AllExercises {
         label:
             'Build the muscles of the shoulders, back and chest, improves posture.',
         description: '- Stand straight, raise straight arms to the sides at shoulder level, palms facing up.\n - Slowly describe small circles with a diameter of about 15 centimeters with your hands. Most of the movement comes from the shoulders, the tension is felt in their back.',
-        durationIsSec: 6,
+        durationIsSec: 60,
         images: ['assets/exercises/1.gif', 'assets/exercises/11.png']),
 
     /// 1
@@ -78,7 +78,7 @@ class AllExercises {
         label: 'Grow up shoulder strength, strengthens the arch of the foot.',
         description:
             '- Stand straight, raise straight arms to the sides at shoulder level, palms pointing down.\n - With an inhalation, rise on your toes, raise your arms up 45 degrees.\n - With an exhalation, stand on the foot entirely, lower your arms to parallel with the floor.',
-        durationIsSec: 1,
+        durationIsSec: 100,
         images: ['assets/exercises/3.gif', 'assets/exercises/13.png']),
 
     /// 3
@@ -95,7 +95,7 @@ class AllExercises {
         label: 'Raises and expands the chest. Stretches the abdominal muscles.',
         description:
             '- Stand up straight, with an inhalation, bend your elbows, place your fists under your armpits.\n - Continuing to inhale, take your shoulders back, slightly bend in the thoracic region, expanding the chest, raise your head up and look at the ceiling.\n - With an exhalation, move your hands forward, then spread them apart.\n - While holding your breath, lean forward until parallel with the floor, take your hands back.\n - Straighten up and move your arms forward, and then spread them apart.',
-        durationIsSec: 4,
+        durationIsSec: 40,
         images: ['assets/exercises/5.gif', 'assets/exercises/15.png']),
 
     /// 5
@@ -111,7 +111,7 @@ class AllExercises {
         label: 'Strengthens the muscles of the shoulders.',
         description:
             '- Stand up straight, with an inhalation, raise your shoulders.\n - As you continue to inhale, move your shoulders forward.\n - Exhale as you lower your shoulders.\n - As you continue to exhale, pull your shoulders back.',
-        durationIsSec: 6,
+        durationIsSec: 60,
         images: ['assets/exercises/7.gif', 'assets/exercises/17.png']),
 
     /// 7

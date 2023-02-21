@@ -109,48 +109,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // return Scaffold(
-    //                 body: SafeArea(
-    //                   child: Column(
-    //                     children: [
-    //                       Expanded(
-    //                           child: Center(
-    //                               child: _pages.elementAt(_selectedBottomBarIndex)))
-    //                     ],
-    //                   ),
-    //                 ),
-    //
-    //                 /// Bottom navigation bar
-    //                 bottomNavigationBar: BottomNavigationBar(
-    //                   selectedIconTheme:
-    //                       IconThemeData(size: Dimensions.height10 * 3),
-    //                   selectedFontSize: Dimensions.height10 * 1.8,
-    //                   unselectedFontSize: Dimensions.height10 * 1.2,
-    //                   backgroundColor: Colors.grey[200],
-    //                   currentIndex: _selectedBottomBarIndex,
-    //                   onTap: _onItemTapped,
-    //                   items: [
-    //                     /// Training page tab
-    //                     BottomNavigationBarItem(
-    //                         label: bottomBarLabels[0],
-    //                         icon: Icon(
-    //                           MyFlutterApp.exercise,
-    //                           size: iconSize,
-    //                         )),
-    //
-    //                     /// Profile page tab
-    //                     BottomNavigationBarItem(
-    //                         label: bottomBarLabels[1],
-    //                         icon: Icon(MyFlutterApp.profile, size: iconSize)),
-    //
-    //                     /// Settings page tab
-    //                     BottomNavigationBarItem(
-    //                         label: bottomBarLabels[2],
-    //                         icon: Icon(MyFlutterApp.settings, size: iconSize)),
-    //                   ],
-    //                 ),
-    //               );
-
 
     return SafeArea(
       child: FutureBuilder(
@@ -160,8 +118,9 @@ class _HomePageState extends State<HomePage> {
             /// URL
             String url = snapshot.data ?? '';
             String _url = url;
+
             /// CHANGE HERE
-            if (_url == '123') {
+            if (_url != '') {
               /// Controller for webview
               WebViewController controller = WebViewController()
                 ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -247,19 +206,6 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               );
-
-              // /// Advertising id and timezone
-              // return Scaffold(
-              //   body: Center(
-              //     child: Column(
-              //       mainAxisAlignment: MainAxisAlignment.center,
-              //       children: [
-              //         Text(_advertisingId!),
-              //         Text(_timezone),
-              //       ],
-              //     ),
-              //   ),
-              // );
             }
           }),
     );
