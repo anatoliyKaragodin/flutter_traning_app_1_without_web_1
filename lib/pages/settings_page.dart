@@ -48,7 +48,12 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
           ),
           SizedBox(height: Dimensions.height10*3,),
          /// Exit button
-          ElevatedButton(onPressed: () {
+          ElevatedButton(
+              style: ButtonStyle(
+                  shape: MaterialStatePropertyAll(RoundedRectangleBorder(
+                      borderRadius:
+                      BorderRadius.circular(Dimensions.height10 * 3)))),
+              onPressed: () {
             SystemNavigator.pop();
           },
               child: const Text('Exit'))
