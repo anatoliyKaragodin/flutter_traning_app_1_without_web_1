@@ -33,3 +33,7 @@ final completedExerciseProvider = StateProvider<int>((ref) {
 final completedWorkoutProvider = StateProvider<int>((ref) {
   return 0;
 });
+
+final homePageProvider = StateProvider<int>((ref) {
+  return 2;
+});

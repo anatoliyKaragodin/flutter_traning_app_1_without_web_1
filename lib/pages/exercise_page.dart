@@ -6,7 +6,6 @@ import 'package:flutter_traning_app_1/models/exercise_model.dart';
 import 'package:flutter_traning_app_1/riverpod/riverpod.dart';
 import 'package:flutter_traning_app_1/utils/dimensions_util.dart';
 import 'package:flutter_traning_app_1/widgets/exercise_description_widget.dart';
-import 'package:flutter_traning_app_1/widgets/timer_widget.dart';
 import 'dart:math' as math;
 
 import '../data/exercises.dart';
@@ -154,7 +153,7 @@ class _ExercisePageState extends ConsumerState<ExercisePage> {
                     ref.read(completedWorkoutProvider.notifier).update((state) => state + 1);
 
                     _calculationTime();
-                    Navigator.pushNamed(context, '/homePage');
+                    Navigator.pushNamed(context, '/homePageApp');
                   },
                   child: Text(
                     'FINISH',

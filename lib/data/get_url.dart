@@ -1,6 +1,8 @@
 import 'package:flutter_traning_app_1/data/shared_preferences.dart';
 
 import 'package:dio/dio.dart';
+import 'package:flutter_traning_app_1/main.dart';
+import 'package:flutter_traning_app_1/riverpod/riverpod.dart';
 
 import '../models/server_responce_model.dart';
 
@@ -18,6 +20,7 @@ class GetUrl {
 
     url = _url;
     print('SET URL: $url');
+    print('_________________HOME PAGE: ${container.read(homePageProvider)}');
 
     /// We make request if we have advertisingId and timezone
     /// and don't have url yet
@@ -36,7 +39,8 @@ class GetUrl {
 
         /// Load url from local storage
         String newUrl = await LocalData().getUrl();
-
+        if(newUrl != '') {container.read(homePageProvider.notifier).update((state) => 1);
+        }
         /// Check that we do one request to server(it must be printed one time)
         print('Url from sever: $newUrl');
 
